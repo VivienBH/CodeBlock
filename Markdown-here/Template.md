@@ -1,14 +1,61 @@
 <link href="https://vivienbh.github.io/CodeBlock/Markdown-here/markdown-here-pink.css" rel="stylesheet"></link>
 
-<pre style=" font-size: 0.8em;"><code style=" font-size: 0.8em;">本文版权归作者所有，转载请注明作者和出处。
-未经作者许可，请勿将本文用作商业用途。
-封面来源：见图片水印</code></pre>
-![](http://image3.135editor.com/cache/remote/aHR0cHM6Ly9tbWJpei5xbG9nby5jbi9tbWJpei95cVZBcW9adkRpYkZUU05Yck53dFVDbzlJR2FrUHA2VTJpY3lHa3dORHpWMlFiakNqWFQwWlJQUlRpYnhjRm4yZHRwb3UwcWRlMnkyVWFxdGFYck9QbFNmZy8wP3d4X2ZtdD1wbmc=)
+>本文版权归作者所有，转载请注明作者和出处。
+>未经作者许可，请勿将本文用作商业用途。
+>封面来源：见图片水印
 
+----
 
-这里是正文样式*加上斜体*，最后加上一点儿**粗体**以及`行内代码`还有：
-```代码块
+```javascript
+function syntaxHighlighting() {
+  var n = 33;
+  var s = "hello, こんにちは";
+  console.log(s);
+}
 ```
+
+* plain
+* *emphasis*
+  * **strong emphasis**
+    * ~~strikethrough~~
+* `inline code`
+
+1. Numbered list
+   1. Numbered sub-list
+      1. Numbered sub-sub-list
+2. [Link](https://www.google.com)
+
+
+An image: ![Markdown Here logo](https://raw.githubusercontent.com/adam-p/markdown-here/master/src/common/images/icon24.png) 
+
+> Block quote.  
+> *With* **some** `markdown`.
+
+If **TeX Math** support is enabled, this is the quadratic equation: 
+$-b \pm \sqrt{b^2 - 4ac} \over 2a$
+
+# Header 1
+## Header 2
+### Header 3
+#### Header 4
+##### Header 5
+###### Header 6
+  
+| Tables | Are | Cool |
+| ------------- |:-------------:| -----:|
+| column 3 is | right-aligned | $1600 |
+| column 2 is | centered | $12 |
+| zebra stripes | are neat | $1 |
+
+Here's a horizontal rule:
+
+---
+
+```
+code block
+with no highlighting
+```
+
 ![](http://image3.135editor.com/cache/remote/aHR0cHM6Ly9tbWJpei5xbG9nby5jbi9tbWJpei95cVZBcW9adkRpYkduM3F1aWNMVWZVd2xJdVdabFVDQVNPWXVlcEN3Yk9pYU5IQzRDSUhwc3IyNTJpY3NFeUh5NGx0a3VJTzBVclB1d0N5WjhHSFRmMTBtVEEvMD93eF9mbXQ9cG5n)
 
 
