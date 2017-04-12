@@ -85,10 +85,12 @@ table, pre, dl, blockquote, q, ul, ol {
 
 ul, ol {
   padding-left: 15px;
+  color:#7F7F7F;
 }
 
 li {
   margin: 10px;
+  color:#7F7F7F;
 }
 
 li p {
