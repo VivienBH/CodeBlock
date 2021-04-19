@@ -10,6 +10,17 @@
 
 /* This is the overall wrapper, it should be treated as the `body` section. */
 .markdown-here-wrapper {
+  font-size: 1.0em;
+  font-family:微软雅黑;
+  line-height: 1.8em;
+  letter-spacing: 0.1em;
+}
+
+body {
+  font-size: 1.0em;
+  font-family:微软雅黑;
+  line-height: 1.8em;
+  letter-spacing: 0.1em;
 }
 
 /* To add site specific rules, you can use the `data-md-url` attribute that we
@@ -18,101 +29,98 @@
 */
 /* .markdown-here-wrapper[data-md-url*="mail.yahoo."] ul { color: red; } */
 
-.markdown-here-wrapper {
-  font-size: 16px;
-  font-family:微软雅黑;
-  line-height: 1.8em;
-  letter-spacing: 0.1em;
-}
-
-body {
-  font-size: 16px;
-  font-family:微软雅黑;
-  line-height: 1.8em;
-  letter-spacing: 0.1em;
-}
-
-pre {  
-  white-space: pre-wrap;  !important;      /* css-3 */ 
-  white-space: -moz-pre-wrap;  !important; /* Mozilla, since 1999 */ 
-  white-space: -pre-wrap;  !important;     /* Opera 4-6 */ 
-  white-space: -o-pre-wrap;  !important;   /* Opera 7 */ 
-  word-wrap: break-word;  !important;      /* Internet Explorer 5.5+ */ 
-} 
-
 pre, code {
-  font-size: 14px;
-  font-family: Roboto, 'Courier New', Consolas, Inconsolata, Courier, monospace;
-  margin: auto 5px;
+  font-size: 1em;
+  font-family: Consolas, Inconsolata, Courier, monospace;
 }
 
 code {
+  margin: 0 0.15em;
+  padding: 0 0.3em;
   white-space: pre-wrap;
-  border-radius: 2px;
-  display: inline;
+  border: 1px solid #EAEAEA;
+  background-color: #F8F8F8;
+  border-radius: 3px;
+  display: inline; /* added to fix Yahoo block display of inline code */
 }
 
 pre {
-  font-size: 15px;
+  font-size: 1.1em;
   line-height: 1.4em;
-  display: block; !important;
 }
 
 pre code {
   white-space: pre;
-  overflow: auto;
+  overflow: auto; /* fixes issue #70: Firefox/Thunderbird: Code blocks with horizontal scroll would have bad background colour */
   border-radius: 3px;
-  padding: 1px 1px;
-  display: block !important;
+  border: 1px solid #CCC;
+  padding: 0.5em 0.7em;
+  display: block !important; /* added to counteract the Yahoo-specific `code` rule; without this, code blocks in Blogger are broken */
 }
 
-strong, b{
-  color: #ea6f5a;
+/* In edit mode, Wordpress uses a `* { font: ...;} rule+style that makes highlighted
+code look non-monospace. This rule will override it. */
+.markdown-here-wrapper[data-md-url*="wordpress."] code span {
+  font: inherit;
 }
 
-em, i {
-  color: #FFCC66;
+/* Wordpress adds a grey background to `pre` elements that doesn't go well with
+our syntax highlighting. */
+.markdown-here-wrapper[data-md-url*="wordpress."] pre {
+  background-color: transparent;
 }
 
-hr {
-  border: 1px solid #F87A7A;
-  margin: 1.5em auto;
-}
-
+/* This spacing has been tweaked to closely match Gmail+Chrome "paragraph" (two line breaks) spacing.
+Note that we only use a top margin and not a bottom margin -- this prevents the
+"blank line" look at the top of the email (issue #243).
+*/
 p {
-  margin: 1.5em 5px !important;
+  /* !important is needed here because Hotmail/Outlook.com uses !important to
+     kill the margin in <p>. We need this to win. */
+  margin: 0 0 1.2em 0 !important;
   line-height: 1.75em;
   white-space: normal;
   text-align: justify;
-  color:#7F7F7F;
-  margin-bottom:10px;
+  margin-bottom:0.6em;
 }
 
 table, pre, dl, blockquote, q, ul, ol {
-  margin: 10px 5px;
+  margin: 1.2em 0;
 }
 
 ul, ol {
-  padding-left: 15px;
-  color:#7F7F7F;
+  padding-left: 2em;
 }
 
 li {
-  margin: 10px;
-  color:#7F7F7F;
+  margin: 0.5em 0;
 }
 
+/* Space paragraphs in a list the same as the list itself. */
 li p {
-  margin: 10px 0 !important;
+  /* Needs !important to override rule above. */
+  margin: 0.5em 0 !important;
 }
 
+/* Smaller spacing for sub-lists */
 ul ul, ul ol, ol ul, ol ol {
   margin: 0;
-  padding-left: 10px;
+  padding-left: 1em;
 }
 
-ul {
-  list-style-type: circle;
+/* Use letters for unordered-lists. (Like Github.) */
+ul ul, ul, ul {
+  list-style-type: square;
+}
+
+/* Use Roman numerals for sub-ordered-lists. (Like Github.) */
+ol ol, ul ol {
+  list-style-type: lower-roman;
+}
+
+/* Use letters for sub-sub-ordered lists. (Like Github.) */
+ul ul ol, ul ol ol, ol ul ol, ol ol ol {
+  list-style-type: lower-alpha;
 }
 
 dl {
@@ -126,16 +134,15 @@ dl dt {
 }
 
 dl dd {
-  margin: 0 0 10px;
-  padding: 0 10px;
+  margin: 0 0 1em;
+  padding: 0 1em;
 }
 
 blockquote, q {
-  border-left: 2px solid #009688;
-  padding: 0 10px;
+  border-left: 4px solid #DDD;
+  padding: 0 1em;
   color: #777;
   quotes: none;
-  margin-left: 1em;
 }
 
 blockquote::before, blockquote::after, q::before, q::after {
@@ -143,38 +150,41 @@ blockquote::before, blockquote::after, q::before, q::after {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 20px 0 10px;
+  margin: 1.3em 0 1em;
   padding: 0;
-  font-style: bold !important;
-  color: #F87A7A !important;
-  margin: 1.5em 5px !important;
-  padding: 0.5em 1em !important;
+  font-weight: normal;
+  color: #F87A7A!important;
 }
 
 h1 {
-  font-size: 24px !important;
-  border-bottom: 1px solid #ddd !important;
+  font-size: 1.4em;
+  border-bottom: 1px solid #ddd;
 }
 
 h2 {
-  font-size: 20px !important;
-  border-bottom: 1px solid #eee !important;
+  font-size: 1.2em;
+  padding: 5px 15px;
+  border-left: 5px solid #F87A7A;
+  background-color:#f6f6f6;
 }
 
 h3 {
-  font-size: 18px;
-  padding: 5px 15px;
-  border-left: 5px solid rgb(248, 122, 122);
-  border-radius: 3px;
-  background-color:#f6f6f6;
-  display: inline-block;
-  line-height: 28px;
+  font-size: 1.2em;
+  border-bottom: 1px solid #eee;
 }
 
 h4 {
-  font-size: 16px;
+  font-size: 1em;
 }
 
+h5 {
+  font-size: 1em;
+}
+
+h6 {
+  font-size: 1em;
+  color: #777;
+}
 
 table {
   padding: 0;
@@ -183,7 +193,6 @@ table {
   font-size: 1em;
   font: inherit;
   border: 0;
-  margin: 0 auto;
 }
 
 tbody {
@@ -205,134 +214,30 @@ table tr:nth-child(2n) {
 }
 
 table tr th, table tr td {
-  font-size: 16px;
+  font-size: 1em;
   border: 1px solid #CCC;
   margin: 0;
-  padding: 5px 10px;
+  padding: 0.5em 1em;
 }
 
 table tr th {
   font-weight: bold;
+  background-color: #F0F0F0;
   color: #eee;
   border: 1px solid #009688;
   background-color: #009688;
 }
 
-a{color:#1863a1}
-
-pre,code,p code,li code{font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace}
-
-pre{-webkit-border-radius:0.4em;-moz-border-radius:0.4em;-ms-border-radius:0.4em;-o-border-radius:0.4em;border-radius:0.4em;border:1px solid #e7dec3;line-height:1.45em;font-size:0.9rem;margin-bottom:2.1em;padding:.8em 1em;color:#586e75;overflow:auto; background-color:#fdf6e3;}
-
-p code,li code{display:inline-block;white-space:no-wrap;background:#fff;font-size:0.9rem;line-height:1.5em;color:#555;border:1px solid #ddd;-webkit-border-radius:0.4em;-moz-border-radius:0.4em;-ms-border-radius:0.4em;-o-border-radius:0.4em;border-radius:0.4em;padding:0 .3em;margin:-1px 4px;}
-p pre code,li pre code{font-size:1em !important;background:none;border:none}
-
-img{max-width:100%;-webkit-border-radius:0.3em;-moz-border-radius:0.3em;-ms-border-radius:0.3em;-o-border-radius:0.3em;border-radius:0.3em;-webkit-box-shadow:rgba(0,0,0,0.15) 0 1px 4px;-moz-box-shadow:rgba(0,0,0,0.15) 0 1px 4px;box-shadow:rgba(0,0,0,0.15) 0 1px 4px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;border:#fff 0.5em solid}
-
-/*
-
-Orginal Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmail.com>
-
-*/
-
-.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  background: #fdf6e3;
-  color: #657b83;
-  -webkit-text-size-adjust: none;
+strong, b{
+  color: #F87A7A;
+  font-weight: normal;
 }
 
-.hljs-comment,
-.diff .hljs-header,
-.hljs-doctype,
-.hljs-pi,
-.lisp .hljs-string {
-  color: #93a1a1;
+em, i {
+  color: #FFCC66;
 }
 
-/* Solarized Green */
-.hljs-keyword,
-.hljs-winutils,
-.method,
-.hljs-addition,
-.css .hljs-tag,
-.hljs-request,
-.hljs-status,
-.nginx .hljs-title {
-  color: #859900;
-}
-
-/* Solarized Cyan */
-.hljs-number,
-.hljs-command,
-.hljs-string,
-.hljs-tag .hljs-value,
-.hljs-rule .hljs-value,
-.hljs-doctag,
-.tex .hljs-formula,
-.hljs-regexp,
-.hljs-hexcolor,
-.hljs-link_url {
-  color: #2aa198;
-}
-
-/* Solarized Blue */
-.hljs-title,
-.hljs-localvars,
-.hljs-chunk,
-.hljs-decorator,
-.hljs-built_in,
-.hljs-identifier,
-.vhdl .hljs-literal,
-.hljs-id,
-.css .hljs-function,
-.hljs-name {
-  color: #268bd2;
-}
-
-/* Solarized Yellow */
-.hljs-attribute,
-.hljs-variable,
-.lisp .hljs-body,
-.smalltalk .hljs-number,
-.hljs-constant,
-.hljs-class .hljs-title,
-.hljs-parent,
-.hljs-type,
-.hljs-link_reference {
-  color: #b58900;
-}
-
-/* Solarized Orange */
-.hljs-preprocessor,
-.hljs-preprocessor .hljs-keyword,
-.hljs-pragma,
-.hljs-shebang,
-.hljs-symbol,
-.hljs-symbol .hljs-string,
-.diff .hljs-change,
-.hljs-special,
-.hljs-attr_selector,
-.hljs-subst,
-.hljs-cdata,
-.css .hljs-pseudo,
-.hljs-header {
-  color: #cb4b16;
-}
-
-/* Solarized Red */
-.hljs-deletion,
-.hljs-important {
-  color: #dc322f;
-}
-
-/* Solarized Violet */
-.hljs-link_label {
-  color: #6c71c4;
-}
-
-.tex .hljs-formula {
-  background: #eee8d5;
+hr {
+  border: 1px solid #F87A7A;
+  margin: 1.5em auto;
 }
